@@ -16,7 +16,7 @@ SORU SORMA (ask_question)
   8-9. Benzerlik hesaplanir, en iyi K parca secilir   retriever.py         cosine similarity (NumPy)
   10.  Parcalar baglam olarak modele verilir          generator.py         qwen3.5-2b
   11.  Model yalnizca bu baglama gore cevaplar        system_prompts.py    baglam disina cikmaz
-  12.  Cevap ve kaynaklar gosterilir                  streamlit_app.py     dosya adi, parca no, benzerlik
+  12.  Cevap ve kaynakca gosterilir                   streamlit_app.py     kullanilan belge adlari
 ```
 
 Tum zincir tek makinede calisir. Internet yalnizca modellerin **ilk indirilmesinde** gerekir;

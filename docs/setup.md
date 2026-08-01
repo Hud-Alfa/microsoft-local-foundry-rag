@@ -105,8 +105,9 @@ bir chat modeli sec (ornegin `qwen3.5-0.8b`). Testler bu durumda kirmizi yanmaz,
 yazip atlanir.
 
 **Cevaplar cok yavas**
-Sure, prompt'a giren baglam uzunluguyla dogru orantilidir. Arayuzdeki "Kac parca kullanilsin"
-kaydiricisini dusur; `MAX_CONTEXT_CHARS` zaten ust siniri zorlar.
+Sure, prompt'a giren baglam uzunluguyla dogru orantilidir. `config.py`'daki `TOP_K` ve
+`MAX_CONTEXT_CHARS` ust siniri belirler; degistirirsen `python tests\evaluate_rag.py` ile
+dogruluk kaybi olup olmadigini olc.
 
 **Cevap "Verilen belgelerde bu bilgi bulunmuyor." diyor ama bilgi belgede var**
 Once dogru parcanin getirilip getirilmedigine bak: cevabin altindaki kaynak listesi ve benzerlik

@@ -6,12 +6,7 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from backend.core.config import (  # noqa: E402
-    CHAT_MODEL_ALIAS,
-    DOCUMENTS_DIR,
-    EMBEDDING_MODEL_ALIAS,
-    TOP_K,
-)
+from backend.core.config import DOCUMENTS_DIR  # noqa: E402
 from backend.core.document_loader import UnsupportedFileTypeError  # noqa: E402
 from backend.core.rag_service import (  # noqa: E402
     ask_question,
@@ -64,10 +59,6 @@ def render_collection_sidebar() -> int | None:
         ),
     )
 
-    st.sidebar.divider()
-    st.sidebar.caption(f"Cevap modeli: {CHAT_MODEL_ALIAS}")
-    st.sidebar.caption(f"Gomme modeli: {EMBEDDING_MODEL_ALIAS}")
-    st.sidebar.caption("Tum modeller Foundry Local uzerinde, cihazda calisir.")
     return selected
 
 
@@ -113,13 +104,12 @@ def render_documents_tab(collection_id: int) -> None:
 
 def render_question_tab(collection_id: int) -> None:
     question = st.text_input("Sorunuz")
-    top_k = st.slider("Kac parca kullanilsin", min_value=1, max_value=10, value=TOP_K)
 
     if not (st.button("Sor", type="primary") and question.strip()):
         return
 
     with st.spinner("Cevap uretiliyor (model ilk cagrida yukleniyor)..."):
-        result = ask_question(question.strip(), collection_id, top_k=top_k)
+        result = ask_question(question.strip(), collection_id)
     save_chat(question.strip(), result["answer"], collection_id)
 
     st.markdown("### Cevap")
@@ -127,13 +117,11 @@ def render_question_tab(collection_id: int) -> None:
 
     st.markdown("### Kaynaklar")
     if not result["sources"]:
-        st.caption("Bu koleksiyonda eslesen parca bulunamadi.")
+        st.caption("Bu koleksiyonda eslesen belge bulunamadi.")
         return
-    for index, source in enumerate(result["sources"], start=1):
-        st.write(
-            f"[{index}] {source['filename']} - parca #{source['chunk_index']} "
-            f"- benzerlik {source['similarity_score']:.3f}"
-        )
+    # ayni belgeden birden fazla parca gelebilir, kaynakcada belge adi bir kez yazilir
+    for filename in dict.fromkeys(source["filename"] for source in result["sources"]):
+        st.write(f"- {filename}")
 
 
 def render_history_tab(collection_id: int) -> None:
