@@ -7,6 +7,7 @@ from backend.core.embedder import embed_query, embed_texts
 from backend.core.generator import fit_context, generate_answer
 from backend.core.retriever import find_relevant_chunks
 from backend.database.db import get_connection
+from backend.prompts.system_prompts import EMPTY_QUESTION_ANSWER
 
 INSERT_DOCUMENT = """
 INSERT INTO documents (collection_id, filename, file_type, char_count, word_count)
@@ -153,6 +154,10 @@ def ask_question(
     top_k: int = TOP_K,
     db_path: str | Path = DB_PATH,
 ) -> dict:
+    # bos soru iki modeli de bosuna calistirir, cevabi da anlamsiz olur
+    if not question.strip():
+        return {"answer": EMPTY_QUESTION_ANSWER, "sources": []}
+
     relevant_chunks = find_relevant_chunks(
         embed_query(question), collection_id, top_k=top_k, db_path=db_path
     )

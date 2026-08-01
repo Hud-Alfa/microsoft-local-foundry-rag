@@ -7,6 +7,7 @@ import pytest
 from backend.core import rag_service
 from backend.core.config import CHAT_MODEL_ALIAS, EMBEDDING_DTYPE, EMBEDDING_MODEL_ALIAS
 from backend.database.db import get_connection, init_db
+from backend.prompts.system_prompts import EMPTY_QUESTION_ANSWER
 from tests.helpers import skip_if_out_of_memory
 
 SAMPLES_DIR = Path(__file__).resolve().parent.parent / "data" / "samples"
@@ -166,6 +167,19 @@ def test_ask_question_picks_the_matching_chunk(
     )
 
     assert cevrimdisi["sources"][0]["chunk_index"] != parcalama["sources"][0]["chunk_index"]
+
+
+@pytest.mark.parametrize("question", ["", "   "])
+def test_empty_question_does_not_call_models(db_path, collection_id, monkeypatch, question):
+    def fail(*args, **kwargs):
+        raise AssertionError("bos soruda model cagrilmamali")
+
+    monkeypatch.setattr(rag_service, "embed_query", fail)
+    monkeypatch.setattr(rag_service, "generate_answer", fail)
+
+    result = rag_service.ask_question(question, collection_id, db_path=db_path)
+
+    assert result == {"answer": EMPTY_QUESTION_ANSWER, "sources": []}
 
 
 def test_ask_question_on_empty_collection(db_path, collection_id, offline_models):

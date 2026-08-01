@@ -1,0 +1,451 @@
+{
+  "generated_at": "2026-08-01T23:55:49",
+  "document": "sirket_el_kitabi.md",
+  "config": {
+    "chat_model": "qwen3.5-2b",
+    "embedding_model": "qwen3-embedding-0.6b",
+    "chunk_size": 400,
+    "chunk_overlap": 80,
+    "top_k": 3,
+    "max_context_chars": 2000,
+    "temperature": 0.2,
+    "random_seed": 42
+  },
+  "summary": {
+    "total_questions": 15,
+    "passed": 12,
+    "scored": 12,
+    "manual_review": 3,
+    "correct_chunk_rate": 1.0,
+    "sources_shown_rate": 0.867,
+    "average_seconds": 11.41,
+    "slowest_seconds": 19.98,
+    "by_category": {
+      "answerable": {
+        "total": 7,
+        "passed": 7,
+        "manual": 0
+      },
+      "unanswerable": {
+        "total": 3,
+        "passed": 3,
+        "manual": 0
+      },
+      "ambiguous": {
+        "total": 3,
+        "passed": 0,
+        "manual": 3
+      },
+      "empty": {
+        "total": 2,
+        "passed": 2,
+        "manual": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": 1,
+      "category": "answerable",
+      "question": "Yillik izin kac gun?",
+      "answer": "Calisanlar yilda 20 is gunu ucretli yillik izin hakkina sahiptir.",
+      "duration_seconds": 19.98,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.7134528756141663
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 0,
+          "similarity_score": 0.4409075975418091
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.3737635314464569
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 2,
+      "category": "answerable",
+      "question": "Ofis cuma gunleri saat kacta kapaniyor?",
+      "answer": "Ofis cuma gunleri 17:00'de kapanir.",
+      "duration_seconds": 11.93,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 0,
+          "similarity_score": 0.5751956105232239
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.49493375420570374
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.45528745651245117
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 3,
+      "category": "answerable",
+      "question": "Gunluk harcirah ne kadar?",
+      "answer": "Gunluk harcirah 500 TL'dir.",
+      "duration_seconds": 11.42,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.5933718085289001
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4361265301704407
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 0,
+          "similarity_score": 0.37435564398765564
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 4,
+      "category": "answerable",
+      "question": "Ekipman arizasinda ne yapilir?",
+      "answer": "Ariza durumunda bilgi islem birimine ticket acilir.",
+      "duration_seconds": 12.57,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.4995464086532593
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4197905361652374
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 3,
+          "similarity_score": 0.38180282711982727
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 5,
+      "category": "answerable",
+      "question": "Sifre en az kac karakter olmali?",
+      "answer": "Sifreler üç ayda bir değiştirilir ve en az on iki karakter olmalıdır.",
+      "duration_seconds": 11.83,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 3,
+          "similarity_score": 0.4941529631614685
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.3883924186229706
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.32329508662223816
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 6,
+      "category": "answerable",
+      "question": "Masraf fisleri ne zaman teslim edilir?",
+      "answer": "Masraf fisleri seyahat bitiminden sonra yedi gun icinde muhasebeye teslim edilir.",
+      "duration_seconds": 12.19,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.5083869695663452
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.454288512468338
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4219151735305786
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 7,
+      "category": "answerable",
+      "question": "Bes yildan uzun calisanin izin hakki nedir?",
+      "answer": "Bes yildan uzun calisanlarin izin hakki 25 is gunune cikar.",
+      "duration_seconds": 14.45,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.735948383808136
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 0,
+          "similarity_score": 0.4458005130290985
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 3,
+          "similarity_score": 0.39812031388282776
+        }
+      ],
+      "correct_chunk_retrieved": true,
+      "keyword_hit": true,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 8,
+      "category": "unanswerable",
+      "question": "Kombinin garanti suresi kac yil?",
+      "answer": "Verilen belgelerde bu bilgi bulunmuyor.",
+      "duration_seconds": 12.93,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.4541822671890259
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4443773031234741
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.3361249268054962
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": true,
+      "passed": true
+    },
+    {
+      "id": 9,
+      "category": "unanswerable",
+      "question": "Sirketin gecen yilki cirosu ne kadar?",
+      "answer": "Verilen belgelerde bu bilgi bulunmuyor.",
+      "duration_seconds": 14.22,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4619685411453247
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 0,
+          "similarity_score": 0.4163135588169098
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.40248772501945496
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": true,
+      "passed": true
+    },
+    {
+      "id": 10,
+      "category": "unanswerable",
+      "question": "Dogum izni kac hafta?",
+      "answer": "Verilen belgelerde bu bilgi bulunmuyor.",
+      "duration_seconds": 11.62,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.5003082156181335
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.36172518134117126
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 3,
+          "similarity_score": 0.34270578622817993
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": true,
+      "passed": true
+    },
+    {
+      "id": 11,
+      "category": "ambiguous",
+      "question": "Sure ne kadar?",
+      "answer": "Onarım süresi ortalama üç günüdür.",
+      "duration_seconds": 11.54,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.43258506059646606
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.4233933091163635
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.35389041900634766
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": false,
+      "passed": null
+    },
+    {
+      "id": 12,
+      "category": "ambiguous",
+      "question": "Kac gun?",
+      "answer": "Calisanlar yilda 20 is gunu ucretli yillik izin hakkina sahiptir.",
+      "duration_seconds": 12.22,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.47299009561538696
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.33917319774627686
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.33487600088119507
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": false,
+      "passed": null
+    },
+    {
+      "id": 13,
+      "category": "ambiguous",
+      "question": "Onay gerekiyor mu?",
+      "answer": "Verilen belgelerde bu bilgi bulunmuyor.",
+      "duration_seconds": 14.24,
+      "sources_shown": true,
+      "sources": [
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 1,
+          "similarity_score": 0.43584144115448
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 2,
+          "similarity_score": 0.4232842028141022
+        },
+        {
+          "filename": "sirket_el_kitabi.md",
+          "chunk_index": 4,
+          "similarity_score": 0.39820024371147156
+        }
+      ],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": true,
+      "passed": null
+    },
+    {
+      "id": 14,
+      "category": "empty",
+      "question": "",
+      "answer": "Lutfen bir soru yazin.",
+      "duration_seconds": 0.0,
+      "sources_shown": false,
+      "sources": [],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": false,
+      "passed": true
+    },
+    {
+      "id": 15,
+      "category": "empty",
+      "question": "   ",
+      "answer": "Lutfen bir soru yazin.",
+      "duration_seconds": 0.0,
+      "sources_shown": false,
+      "sources": [],
+      "correct_chunk_retrieved": null,
+      "keyword_hit": null,
+      "refused": false,
+      "passed": true
+    }
+  ]
+}

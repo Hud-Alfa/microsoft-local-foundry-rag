@@ -1,0 +1,110 @@
+{
+  "document": "sirket_el_kitabi.md",
+  "questions": [
+    {
+      "id": 1,
+      "category": "answerable",
+      "question": "Yillik izin kac gun?",
+      "expected_keywords": ["20"],
+      "expected_chunk_snippet": "20 is gunu ucretli yillik izin"
+    },
+    {
+      "id": 2,
+      "category": "answerable",
+      "question": "Ofis cuma gunleri saat kacta kapaniyor?",
+      "expected_keywords": ["17"],
+      "expected_chunk_snippet": "Cuma gunleri ofis 17:00"
+    },
+    {
+      "id": 3,
+      "category": "answerable",
+      "question": "Gunluk harcirah ne kadar?",
+      "expected_keywords": ["500"],
+      "expected_chunk_snippet": "gunluk harcirah 500 TL"
+    },
+    {
+      "id": 4,
+      "category": "answerable",
+      "question": "Ekipman arizasinda ne yapilir?",
+      "expected_keywords": ["ticket", "bilgi islem"],
+      "expected_chunk_snippet": "bilgi islem birimine ticket acilir"
+    },
+    {
+      "id": 5,
+      "category": "answerable",
+      "question": "Sifre en az kac karakter olmali?",
+      "expected_keywords": ["on iki", "12"],
+      "expected_chunk_snippet": "en az on iki karakter"
+    },
+    {
+      "id": 6,
+      "category": "answerable",
+      "question": "Masraf fisleri ne zaman teslim edilir?",
+      "expected_keywords": ["yedi", "7"],
+      "expected_chunk_snippet": "yedi gun icinde"
+    },
+    {
+      "id": 7,
+      "category": "answerable",
+      "question": "Bes yildan uzun calisanin izin hakki nedir?",
+      "expected_keywords": ["25"],
+      "expected_chunk_snippet": "izin hakki 25 is gunune cikar"
+    },
+    {
+      "id": 8,
+      "category": "unanswerable",
+      "question": "Kombinin garanti suresi kac yil?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 9,
+      "category": "unanswerable",
+      "question": "Sirketin gecen yilki cirosu ne kadar?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 10,
+      "category": "unanswerable",
+      "question": "Dogum izni kac hafta?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 11,
+      "category": "ambiguous",
+      "question": "Sure ne kadar?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 12,
+      "category": "ambiguous",
+      "question": "Kac gun?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 13,
+      "category": "ambiguous",
+      "question": "Onay gerekiyor mu?",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 14,
+      "category": "empty",
+      "question": "",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    },
+    {
+      "id": 15,
+      "category": "empty",
+      "question": "   ",
+      "expected_keywords": [],
+      "expected_chunk_snippet": null
+    }
+  ]
+}

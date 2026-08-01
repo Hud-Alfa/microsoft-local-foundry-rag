@@ -1,4 +1,5 @@
 NO_CONTEXT_ANSWER = "Verilen belgelerde bu bilgi bulunmuyor."
+EMPTY_QUESTION_ANSWER = "Lutfen bir soru yazin."
 
 # Kural sayisi bilerek az ve "once cevapla" sirasinda: reddetme kurallari agir bastiginda
 # model baglamda acikca yazan bilgiyi de tartisip cevapsiz birakiyor (olculdu).
