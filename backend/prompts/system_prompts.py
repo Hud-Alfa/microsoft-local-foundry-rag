@@ -16,3 +16,9 @@ Soru: {question}"""
 
 CONTEXT_ITEM_TEMPLATE = """[{index}] Kaynak: {filename}
 {chunk_text}"""
+
+# Qwen3-Embedding asimetrik calisir: belge parcalari ham gomulur, sorgu talimatla
+# gomulur. Olcumde dogru parcanin ikinciden ayrilma farki iki katina cikti.
+QUERY_INSTRUCTION_TEMPLATE = (
+    "Instruct: Verilen soruya cevap iceren belge parcasini bul\nQuery: {question}"
+)

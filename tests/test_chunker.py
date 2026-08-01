@@ -55,6 +55,44 @@ def test_chunks_overlap_and_cover_whole_text():
     assert chunks[-1]["end_char"] == len(text)
 
 
+def test_paragraphs_are_packed_without_splitting():
+    text = "Baslik bir\nIcerik bir.\n\nBaslik iki\nIcerik iki.\n\nBaslik uc\nIcerik uc."
+
+    chunks = chunk_text(text, chunk_size=30, overlap=5)
+
+    assert [chunk["chunk_text"] for chunk in chunks] == [
+        "Baslik bir\nIcerik bir.",
+        "Baslik iki\nIcerik iki.",
+        "Baslik uc\nIcerik uc.",
+    ]
+
+
+def test_small_paragraphs_share_one_chunk():
+    text = "Bir.\n\nIki.\n\nUc."
+
+    chunks = chunk_text(text, chunk_size=100, overlap=10)
+
+    assert len(chunks) == 1
+    assert chunks[0]["chunk_text"] == text
+
+
+def test_paragraph_longer_than_chunk_size_falls_back_to_windows():
+    text = "kisa paragraf\n\n" + "u" * 50
+
+    chunks = chunk_text(text, chunk_size=20, overlap=5)
+
+    assert chunks[0]["chunk_text"] == "kisa paragraf"
+    assert all(len(chunk["chunk_text"]) <= 20 for chunk in chunks)
+    assert "".join(chunk["chunk_text"] for chunk in chunks[1:]).count("u") >= 50
+
+
+def test_offsets_still_point_into_original_text():
+    text = "Ilk paragraf burada.\n\nIkinci paragraf burada.\n\nUcuncu paragraf."
+
+    for chunk in chunk_text(text, chunk_size=25, overlap=5):
+        assert text[chunk["start_char"] : chunk["end_char"]] == chunk["chunk_text"]
+
+
 def test_overlap_greater_than_chunk_size_raises():
     with pytest.raises(ValueError, match="overlap"):
         chunk_text("a" * 50, chunk_size=10, overlap=15)

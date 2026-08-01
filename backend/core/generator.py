@@ -3,6 +3,7 @@ from backend.core.config import (
     ANSWER_RANDOM_SEED,
     ANSWER_TEMPERATURE,
     CHAT_MODEL_ALIAS,
+    MAX_CONTEXT_CHARS,
 )
 from backend.core.foundry import load_model
 from backend.prompts.system_prompts import (
@@ -24,6 +25,18 @@ def get_chat_client():
         client.settings.random_seed = ANSWER_RANDOM_SEED
         _chat_client = client
     return _chat_client
+
+
+def fit_context(context_chunks: list[dict], max_chars: int = MAX_CONTEXT_CHARS) -> list[dict]:
+    fitted = []
+    used_chars = 0
+    for chunk in context_chunks:
+        chunk_length = len(chunk["chunk_text"])
+        if fitted and used_chars + chunk_length > max_chars:
+            break
+        fitted.append(chunk)
+        used_chars += chunk_length
+    return fitted
 
 
 def build_context(context_chunks: list[dict]) -> str:

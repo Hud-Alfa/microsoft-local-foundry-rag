@@ -57,6 +57,21 @@ def test_embed_texts_sends_all_texts_in_one_batch(fake_client):
     assert len(fake_client.calls) == 1
 
 
+def test_embed_query_adds_instruction_prefix(fake_client):
+    vector = embedder.embed_query("Yillik izin kac gun?")
+
+    sent_text = fake_client.calls[0][0]
+    assert sent_text.startswith("Instruct:")
+    assert "Yillik izin kac gun?" in sent_text
+    assert vector.shape == (fake_client.dimensions,)
+
+
+def test_embed_texts_does_not_add_prefix(fake_client):
+    embedder.embed_texts(["belge parcasi"])
+
+    assert fake_client.calls[0] == ["belge parcasi"]
+
+
 def test_embed_texts_empty_input_does_not_call_model(monkeypatch):
     def fail():
         raise AssertionError("bos girdide model yuklenmemeli")

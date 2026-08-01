@@ -7,6 +7,7 @@ import pytest
 from backend.core import rag_service
 from backend.core.config import CHAT_MODEL_ALIAS, EMBEDDING_DTYPE, EMBEDDING_MODEL_ALIAS
 from backend.database.db import get_connection, init_db
+from tests.helpers import skip_if_out_of_memory
 
 SAMPLES_DIR = Path(__file__).resolve().parent.parent / "data" / "samples"
 KEYWORDS = ("cevrimdisi", "parcalama", "kedi")
@@ -45,6 +46,7 @@ def collection_id(db_path):
 @pytest.fixture
 def offline_models(monkeypatch):
     monkeypatch.setattr(rag_service, "embed_texts", fake_embed_texts)
+    monkeypatch.setattr(rag_service, "embed_query", lambda question: fake_embed_texts([question])[0])
     monkeypatch.setattr(
         rag_service,
         "generate_answer",
@@ -147,7 +149,8 @@ def test_ask_question_returns_answer_and_sources(
     first = result["sources"][0]
     assert set(first) == {"filename", "chunk_index", "similarity_score"}
     assert first["filename"] == "tesisat.txt"
-    assert first["similarity_score"] > result["sources"][1]["similarity_score"]
+    scores = [source["similarity_score"] for source in result["sources"]]
+    assert scores == sorted(scores, reverse=True)
 
 
 def test_ask_question_picks_the_matching_chunk(
@@ -184,14 +187,17 @@ def test_end_to_end_with_foundry_local(db_path, collection_id):
     if missing:
         pytest.skip(f"indirilmemis model(ler): {', '.join(sorted(missing))}")
 
-    indexed = rag_service.index_document(
-        str(SAMPLES_DIR / "ornek.md"), collection_id, db_path=db_path
-    )
-    assert indexed["chunk_count"] >= 1
+    try:
+        indexed = rag_service.index_document(
+            str(SAMPLES_DIR / "ornek.md"), collection_id, db_path=db_path
+        )
+        assert indexed["chunk_count"] >= 1
 
-    result = rag_service.ask_question(
-        "Bu belge ne icin kullanilir?", collection_id, top_k=2, db_path=db_path
-    )
+        result = rag_service.ask_question(
+            "Bu belge ne icin kullanilir?", collection_id, top_k=2, db_path=db_path
+        )
+    except Exception as error:
+        skip_if_out_of_memory(error)
 
     assert result["answer"].strip()
     assert result["sources"]

@@ -85,7 +85,7 @@ def test_cosine_similarity_zero_vector_scores_zero():
 
 def test_results_are_sorted_by_similarity(db_path, collection_with_chunks):
     results = find_relevant_chunks(
-        _vector(1, 0, 0), collection_with_chunks, db_path=db_path
+        _vector(1, 0, 0), collection_with_chunks, top_k=4, db_path=db_path
     )
 
     assert [result["chunk_text"] for result in results] == [
@@ -143,7 +143,7 @@ def test_other_collections_are_not_searched(db_path, collection_with_chunks):
     _add_chunk(db_path, other_document_id, 0, "diger koleksiyon parcasi", _vector(1, 0, 0))
 
     results = find_relevant_chunks(
-        _vector(1, 0, 0), collection_with_chunks, db_path=db_path
+        _vector(1, 0, 0), collection_with_chunks, top_k=4, db_path=db_path
     )
 
     assert all(result["filename"] == "ornek.txt" for result in results)

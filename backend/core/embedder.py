@@ -2,6 +2,7 @@ import numpy as np
 
 from backend.core.config import EMBEDDING_DTYPE, EMBEDDING_MODEL_ALIAS
 from backend.core.foundry import load_model
+from backend.prompts.system_prompts import QUERY_INSTRUCTION_TEMPLATE
 
 _embedding_client = None
 
@@ -25,3 +26,7 @@ def embed_texts(texts: list[str]) -> np.ndarray:
             f"Model {len(texts)} metin icin {len(vectors)} vektor dondurdu"
         )
     return vectors
+
+
+def embed_query(question: str) -> np.ndarray:
+    return embed_texts([QUERY_INSTRUCTION_TEMPLATE.format(question=question)])[0]

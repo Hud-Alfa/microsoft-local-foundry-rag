@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DB_PATH = Path(__file__).resolve().parent.parent / "database" / "rag.db"
+DOCUMENTS_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "documents"
 
 FOUNDRY_APP_NAME = "local-rag"
 
@@ -18,12 +19,16 @@ CHAT_MODEL_ALIAS = os.getenv("FOUNDRY_CHAT_MODEL", "qwen3.5-2b")
 # ayni dtype ile cozulur, boyut blob uzunlugundan hesaplanir.
 EMBEDDING_DTYPE = "float32"
 
-# Parcalama karakter bazlidir (token degil): 1000/200, yaklasik 250 token'lik
-# parca ve paragraf sinirlarinda baglam kaybini onleyecek kadar ortusme demek.
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 200
+# Parcalama karakter bazlidir (token degil). 400/80 olculerek secildi: kucuk parca
+# hem dogru parcayi one cikariyor (ayrim gucu 0.025 -> 0.091) hem prompt'u kisaltiyor.
+CHUNK_SIZE = 400
+CHUNK_OVERLAP = 80
 
-TOP_K = 5
+TOP_K = 3
+
+# Uretim suresi baglam uzunluguyla dogru orantili (300 krk: 5.7s, 1500 krk: 13.3s) ve
+# 5000 karakterde ONNX "bad allocation" ile cokuyor. Ust sinir bu yuzden kodda zorlanir.
+MAX_CONTEXT_CHARS = 2000
 
 # Cevap uretimi: dusuk sicaklik + sabit seed => ayni soru ayni cevabi verir,
 # degerlendirme (evaluate_rag) ancak boyle karsilastirilabilir olur.

@@ -3,12 +3,14 @@ from pathlib import Path
 
 from backend.core.config import DB_PATH
 
+# created_at localtime: uygulama tek makinede calisiyor, arayuzde UTC gostermek
+# kullaniciyi yaniltiyordu (saat farki kadar geride goruluyordu)
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS collections (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT NOT NULL UNIQUE,
     description TEXT,
-    created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+    created_at  TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
 CREATE TABLE IF NOT EXISTS documents (
@@ -18,7 +20,7 @@ CREATE TABLE IF NOT EXISTS documents (
     file_type     TEXT NOT NULL,
     char_count    INTEGER NOT NULL,
     word_count    INTEGER NOT NULL,
-    created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    created_at    TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
 CREATE TABLE IF NOT EXISTS chunks (
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS chat_history (
     collection_id INTEGER REFERENCES collections(id) ON DELETE CASCADE,
     question      TEXT NOT NULL,
     answer        TEXT NOT NULL,
-    created_at    TEXT NOT NULL DEFAULT (datetime('now'))
+    created_at    TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
 CREATE TABLE IF NOT EXISTS feedback (
@@ -45,7 +47,7 @@ CREATE TABLE IF NOT EXISTS feedback (
     chat_id    INTEGER NOT NULL REFERENCES chat_history(id) ON DELETE CASCADE,
     rating     INTEGER NOT NULL CHECK (rating IN (-1, 1)),
     comment    TEXT,
-    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
 );
 
 CREATE INDEX IF NOT EXISTS idx_documents_collection ON documents(collection_id);
