@@ -13,3 +13,5 @@ EMBEDDING_DTYPE = "float32"
 # parca ve paragraf sinirlarinda baglam kaybini onleyecek kadar ortusme demek.
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
+
+TOP_K = 5
