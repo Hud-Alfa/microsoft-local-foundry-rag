@@ -4,6 +4,7 @@ microsoft_foundry_local_rag_detayli_anlatim.md
 
 venv/
 .venv/
+.env
 __pycache__/
 *.py[cod]
 

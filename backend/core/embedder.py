@@ -1,39 +1,15 @@
-import sys
-
 import numpy as np
 
-from backend.core.config import (
-    EMBEDDING_DTYPE,
-    EMBEDDING_MODEL_ALIAS,
-    FOUNDRY_APP_NAME,
-)
+from backend.core.config import EMBEDDING_DTYPE, EMBEDDING_MODEL_ALIAS
+from backend.core.foundry import load_model
 
 _embedding_client = None
 
 
-def _report_download_progress(percent: float) -> None:
-    # ilk indirme yuzlerce MB surer, geri bildirim olmazsa uygulama donmus gorunur
-    print(f"\r{EMBEDDING_MODEL_ALIAS} indiriliyor: {percent:.2f}%", end="", file=sys.stderr)
-    if percent >= 100:
-        print(file=sys.stderr)
-
-
 def get_embedding_client():
     global _embedding_client
-    if _embedding_client is not None:
-        return _embedding_client
-
-    # SDK kurulu olmadan da modul import edilebilsin diye import fonksiyon icinde
-    from foundry_local_sdk import Configuration, FoundryLocalManager
-
-    FoundryLocalManager.initialize(Configuration(app_name=FOUNDRY_APP_NAME))
-    manager = FoundryLocalManager.instance
-
-    model = manager.catalog.get_model(EMBEDDING_MODEL_ALIAS)
-    model.download(_report_download_progress)
-    model.load()
-
-    _embedding_client = model.get_embedding_client()
+    if _embedding_client is None:
+        _embedding_client = load_model(EMBEDDING_MODEL_ALIAS).get_embedding_client()
     return _embedding_client
 
 

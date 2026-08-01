@@ -1,5 +1,6 @@
 foundry-local-sdk
 openai
+python-dotenv
 pymupdf
 python-docx
 numpy

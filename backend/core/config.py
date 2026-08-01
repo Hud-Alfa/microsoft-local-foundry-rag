@@ -1,9 +1,18 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DB_PATH = Path(__file__).resolve().parent.parent / "database" / "rag.db"
 
 FOUNDRY_APP_NAME = "local-rag"
-EMBEDDING_MODEL_ALIAS = "qwen3-embedding-0.6b"
+
+# Model ailesi degistirilebilir bir bilesen; kodda sabit degil, .env'den okunur.
+# Buraya yalnizca Foundry Local katalogundaki alias'lar yazilir (bulut modeli degil).
+EMBEDDING_MODEL_ALIAS = os.getenv("FOUNDRY_EMBEDDING_MODEL", "qwen3-embedding-0.6b")
+CHAT_MODEL_ALIAS = os.getenv("FOUNDRY_CHAT_MODEL", "qwen3.5-2b")
 
 # Embedding vektorleri BLOB olarak float32 dizisi seklinde saklanir; okurken
 # ayni dtype ile cozulur, boyut blob uzunlugundan hesaplanir.
