@@ -2,6 +2,9 @@ from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parent.parent / "database" / "rag.db"
 
+FOUNDRY_APP_NAME = "local-rag"
+EMBEDDING_MODEL_ALIAS = "qwen3-embedding-0.6b"
+
 # Embedding vektorleri BLOB olarak float32 dizisi seklinde saklanir; okurken
 # ayni dtype ile cozulur, boyut blob uzunlugundan hesaplanir.
 EMBEDDING_DTYPE = "float32"
