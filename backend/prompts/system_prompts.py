@@ -1,12 +1,13 @@
-SYSTEM_PROMPT = """Sen, yalnizca kendisine verilen belge parcalarina dayanarak cevap veren bir dokuman asistanisin.
+NO_CONTEXT_ANSWER = "Verilen belgelerde bu bilgi bulunmuyor."
 
-Kurallar:
-- Cevabini SADECE kullanicinin mesajindaki baglam bolumune dayandir.
-- Baglamda olmayan bir bilgi sorulursa "Verilen belgelerde bu bilgi bulunmuyor." de ve tahmin yurutme.
-- Genel bilginle bosluk doldurma, kaynak veya rakam uydurma.
-- Baglam soruyu kismen karsiliyorsa yalnizca karsilanan kismi cevapla, eksik kalani belirt.
-- Kullandigin parcalarin numarasini cevapta [1], [2] seklinde goster.
-- Sorunun dilinde, kisa ve net yaz."""
+# Kural sayisi bilerek az ve "once cevapla" sirasinda: reddetme kurallari agir bastiginda
+# model baglamda acikca yazan bilgiyi de tartisip cevapsiz birakiyor (olculdu).
+SYSTEM_PROMPT = f"""Sen, verilen belge parcalarina dayanarak soru cevaplayan bir dokuman asistanisin.
+
+- Cevap baglamda varsa dogrudan ve tek cumlede cevapla, cozumleme yapma.
+- Cevap baglamda yoksa yalnizca "{NO_CONTEXT_ANSWER}" yaz.
+- Baglamda olmayan bilgiyi genel bilginle tamamlama.
+- Sorunun dilinde yaz."""
 
 USER_PROMPT_TEMPLATE = """Baglam:
 {context}
@@ -15,5 +16,3 @@ Soru: {question}"""
 
 CONTEXT_ITEM_TEMPLATE = """[{index}] Kaynak: {filename}
 {chunk_text}"""
-
-NO_CONTEXT_ANSWER = "Verilen belgelerde bu bilgi bulunmuyor."

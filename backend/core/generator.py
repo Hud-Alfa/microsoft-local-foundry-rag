@@ -1,4 +1,9 @@
-from backend.core.config import CHAT_MODEL_ALIAS
+from backend.core.config import (
+    ANSWER_MAX_TOKENS,
+    ANSWER_RANDOM_SEED,
+    ANSWER_TEMPERATURE,
+    CHAT_MODEL_ALIAS,
+)
 from backend.core.foundry import load_model
 from backend.prompts.system_prompts import (
     CONTEXT_ITEM_TEMPLATE,
@@ -13,7 +18,11 @@ _chat_client = None
 def get_chat_client():
     global _chat_client
     if _chat_client is None:
-        _chat_client = load_model(CHAT_MODEL_ALIAS).get_chat_client()
+        client = load_model(CHAT_MODEL_ALIAS).get_chat_client()
+        client.settings.temperature = ANSWER_TEMPERATURE
+        client.settings.max_tokens = ANSWER_MAX_TOKENS
+        client.settings.random_seed = ANSWER_RANDOM_SEED
+        _chat_client = client
     return _chat_client
 
 

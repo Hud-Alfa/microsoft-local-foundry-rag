@@ -24,3 +24,9 @@ CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
 
 TOP_K = 5
+
+# Cevap uretimi: dusuk sicaklik + sabit seed => ayni soru ayni cevabi verir,
+# degerlendirme (evaluate_rag) ancak boyle karsilastirilabilir olur.
+ANSWER_TEMPERATURE = 0.2
+ANSWER_MAX_TOKENS = 400
+ANSWER_RANDOM_SEED = 42

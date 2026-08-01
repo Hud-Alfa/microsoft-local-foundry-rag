@@ -4,7 +4,12 @@ from dataclasses import dataclass
 import pytest
 
 from backend.core import generator
-from backend.core.config import CHAT_MODEL_ALIAS
+from backend.core.config import (
+    ANSWER_MAX_TOKENS,
+    ANSWER_RANDOM_SEED,
+    ANSWER_TEMPERATURE,
+    CHAT_MODEL_ALIAS,
+)
 from backend.prompts.system_prompts import NO_CONTEXT_ANSWER, SYSTEM_PROMPT
 
 is_foundry_installed = importlib.util.find_spec("foundry_local_sdk") is not None
@@ -81,6 +86,31 @@ def test_empty_context_does_not_call_model(monkeypatch):
     monkeypatch.setattr(generator, "get_chat_client", fail)
 
     assert generator.generate_answer("soru?", []) == NO_CONTEXT_ANSWER
+
+
+def test_chat_client_gets_generation_settings(monkeypatch):
+    class FakeSettings:
+        pass
+
+    class FakeModel:
+        def get_chat_client(self):
+            client = FakeChatClient()
+            client.settings = FakeSettings()
+            return client
+
+    loaded_aliases = []
+    monkeypatch.setattr(generator, "_chat_client", None)
+    monkeypatch.setattr(
+        generator, "load_model", lambda alias: loaded_aliases.append(alias) or FakeModel()
+    )
+
+    client = generator.get_chat_client()
+
+    assert loaded_aliases == [CHAT_MODEL_ALIAS]
+    assert client.settings.temperature == ANSWER_TEMPERATURE
+    assert client.settings.max_tokens == ANSWER_MAX_TOKENS
+    assert client.settings.random_seed == ANSWER_RANDOM_SEED
+    assert generator.get_chat_client() is client
 
 
 def test_build_context_keeps_retriever_order():
