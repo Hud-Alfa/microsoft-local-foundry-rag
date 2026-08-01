@@ -1,0 +1,4 @@
+Yerel RAG uygulamasi belgeleri yukler ve sorulari yalnizca bu belgelere
+dayanarak yanitlar.
+
+Tum islem cevrimdisi calisir, hicbir veri disari gonderilmez.

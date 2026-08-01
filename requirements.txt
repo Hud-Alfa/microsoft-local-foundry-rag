@@ -1,6 +1,6 @@
 foundry-local-sdk
 openai
-pypdf
+pymupdf
 python-docx
 numpy
 pandas
